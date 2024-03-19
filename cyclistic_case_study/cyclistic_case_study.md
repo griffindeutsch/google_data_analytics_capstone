@@ -1,4 +1,4 @@
-# 🚴Cyclistic Case Study
+# 🚴 Cyclistic Case Study 🚴
 
 ## Ask - Identifying business/research task
 ## Prepare - Acquire and sort data, identifying any integrity issues
