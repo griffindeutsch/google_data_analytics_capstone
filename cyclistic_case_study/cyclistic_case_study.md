@@ -30,7 +30,7 @@ data_2023 <- data_2023 |>
 #Round ride_length column to nearest whole minute
 data_2023$ride_length <- round(data_2023$ride_length, 0)
 ```
-I then added columns 'start_date', 'end_date', 'start_time', and 'end_time', using values from columns 'started_at' and 'ended_at', respectively.
+I then added columns 'start_date', 'end_date', 'start_time', 'end_time', 'day_of_week', and 'month', using values from columns 'started_at' and 'ended_at', respectively.
 
 ```
 #Create start_date column
@@ -44,8 +44,25 @@ data_2023$start_time <- format(as.POSIXct(data_2023$started_at), format = "%H:%M
 
 #Create end_time column
 data_2023$end_time <- format(as.POSIXct(data_2023$ended_at), format = "%H:%M:%S")
+
+#Create day_of_week column using lubridate package
+data_2023$day_of_week <- wday(data_2023$started_at, label = TRUE)
+
+#Create month column
+data_2023$month <- month(data_2023$started_at, label = TRUE)
 ```
-Lastly, I removed columns irrelevant for analysis in this case study. For example, the values in column 'ride_id' cannot be connected to specific customers due to data-privacy issues, and the columns containing coordinates are redundant as station start and end names are also given.
+
+Next, I changed the names of column 'member_casual' to 'rider_type', and 'rideable_type' to 'bike_type'.
+
+```
+data_2023 <- data_2023 |>
+  rename(bike_type = rideable_type)
+
+data_2023 <- data_2023 |>
+  rename(rider_type = member_casual)
+```
+
+Lastly, I removed columns irrelevant for analysis in this case study. For example, the values in column 'ride_id' cannot be connected to specific customers due to data-privacy issues.
 
 ```
 data_2023 <- select(data_2023, -c(ride_id, start_station_id, end_station_id, start_lat, start_lng, end_lat, end_lng))
@@ -66,10 +83,66 @@ data_2023 <- unique(data_2023)
 data_2023 <- data_2023[data_2023$ride_length >= 0, ]
 ```
 
+Next, I removed some rows meeting certain criteria which represented potentially unreliable data. This was assigned to a new dataframe 'data_2023_filtered'. The following rows were filtered using the subset function.
+1. Rows where 'bike_type' was 'docked_bike'.
+2. Rows where 'ride_length' was less than 1 minute.
+3. Rows where 'ride_length' exceeded 600 minutes (10 hours).
+
+```
+#Filter rows where 'bike_type' equals 'docked_bike'
+data_2023_filtered <- subset(data_2023, bike_type != 'docked_bike')
+
+#Filter rows where 'ride_length' is less than 1 minute or greater than 600 minutes.
+data_2023_filtered <- subset(data_2023, ride_length > 0 & ride_length <= 600)
+```
 
 ## Analyze
 
+First, I did some basic calculations on the data to highlight differences between casual riders and members.
+
+```
+#Calculate mean ride length for casual riders
+casual_rider_mean_length <- data_2023_filtered |>
+  filter(rider_type == "casual") |>
+  summarise(casual_rider_mean_length = mean(ride_length))
+#Print the result
+print(casual_rider_mean_length)
+
+#Calculate mean ride length for members
+member_rider_mean_length <- data_2023_filtered |>
+  filter(rider_type == "member") |>
+  summarise(member_rider_mean_length = mean(ride_length))
+#Print the result
+print(member_rider_mean_length)
+
+#Calculate the mode for the column 'day_of_week' using DescTools mode() function
+day_of_week_mode <- Mode(data_2023_filtered$day_of_week)
+#Print the result
+print(day_of_week_mode)
+```
+I then prepared the data for visualization while analyzing the data. First, I created two new dataframes: one that groups number of riders per month by rider type and one that groups numbers of riders per day by rider type.
+
+```
+#Create new dataframe that groups numbers of riders per month by rider type
+ride_count_by_month <- data_2023_filtered |>
+  group_by(month, rider_type) |>
+  summarise(ride_count = n())
+
+#Create new dataframe that groups numbers of riders per day by rider type
+ride_count_by_day <- data_2023_filtered |>
+  group_by(day_of_week, rider_type) |>
+  summarise(ride_count = n())
+```
+
+
+
+
+
 ## Share
+
+
+
+
 
 ## Act
 
