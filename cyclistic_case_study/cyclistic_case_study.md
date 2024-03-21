@@ -2,9 +2,9 @@
 
 ## Ask - Identify research/buisness task
 ## Prepare - Acquire data and identify any integrity issues
-## [Process](#process---clean-data-and-prepare-for-analysis) - Clean data and prepare for analysis
+## Process - Clean data and prepare for analysis
 ## Analyze - Manipulate data and perform calculations to identify trends and relationships
-## Share -  Create data visualizations
+## [Share](#share----create-data-visualizations) -  Create data visualizations
 ## Act - Share conclusions and offer data-driven insights
 
 ## Ask
