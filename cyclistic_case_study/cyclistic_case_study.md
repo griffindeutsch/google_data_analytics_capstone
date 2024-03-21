@@ -86,7 +86,7 @@ data_2023 <- data_2023[data_2023$ride_length >= 0, ]
 Next, I removed some rows meeting certain criteria which represented potentially unreliable data. This was assigned to a new dataframe 'data_2023_filtered'. The following rows were filtered using the subset function.
 1. Rows where 'bike_type' was 'docked_bike'.
 2. Rows where 'ride_length' was less than 1 minute.
-3. Rows where 'ride_length' exceeded 600 minutes (10 hours).
+3. Rows where 'ride_length' exceeded 600 minutes (10 hours). (I will further filter the data in the analysis process to make visualization easier)
 
 ```
 #Filter rows where 'bike_type' equals 'docked_bike'
@@ -98,7 +98,24 @@ data_2023_filtered <- subset(data_2023, ride_length > 0 & ride_length <= 600)
 
 ## Analyze
 
-First, I did some basic calculations on the data to highlight differences between casual riders and members.
+First, I calculated the mean and standard deviation of the 'ride_length' column. This will allow me to identify outliers that could skew visualizations.
+
+```
+#Calculate the mean of 'ride_length'
+ride_length_mean <- mean(data_2023_filtered$ride_length)
+
+#Calculate the standard deviation of 'ride_length'
+ride_length_sd <- sd(data_2023_filtered$ride_length)
+```
+The result of ride_length_mean is 14.39897 mins and the result of ride_length_sd is 19.20853. The two sigma threshold would therefore be 52.81603, representative of 95% of the (filtered) dataset. Since the column 'ride_length' deals with duration, there is no need to calculate the lower threshold, as it would be a negative duration.
+
+From this result, I created a new dataframe 'data_2023_filtered_sd' which excludes rows that contain a value in 'ride_length' greater than 53 mins. This dataframe will be used to create visualizations involving ride length.
+
+```
+data_2023_filtered_sd <- subset(data_2023_filtered, ride_length <= 53)
+```
+
+Then, I did some basic calculations on the data to highlight differences between casual riders and members.
 
 ```
 #Calculate mean ride length for casual riders
@@ -120,7 +137,7 @@ day_of_week_mode <- Mode(data_2023_filtered$day_of_week)
 #Print the result
 print(day_of_week_mode)
 ```
-I then prepared the data for visualization while analyzing the data. First, I created two new dataframes: one that groups number of riders per month by rider type and one that groups numbers of riders per day by rider type.
+I then prepared the data for visualization while analyzing the data. First, I created two new dataframes comparing rider type behaviors: one that groups number of riders per month by rider type and one that groups numbers of riders per day by rider type.
 
 ```
 #Create new dataframe that groups numbers of riders per month by rider type
@@ -134,11 +151,31 @@ ride_count_by_day <- data_2023_filtered |>
   summarise(ride_count = n())
 ```
 
-
-
-
-
 ## Share
+
+I created the following visualizations to determine relationships between casual riders and members.
+
+### Histogram of Ride Length by Rider Type
+```
+ggplot(data_2023_filtered_sd, aes(x = ride_length, fill = rider_type)) +
+  geom_histogram(position = "dodge", binwidth = 1) +
+    labs(title = "Ride Length by Rider Type",
+    x = "Ride Length (minutes)",
+    y = "Count") +
+  theme_minimal() +
+  scale_y_continuous(labels = label_number())
+```
+We can see from this histogram that while both members and casual riders ride around the same duration on average, many more short trips are by members rather than casual riders.
+
+![Ride Length by Rider Type Histogram](https://github.com/griffindeutsch/google_data_analytics_capstone/assets/63735165/a885bd2c-08ad-45fa-9a93-3b22f3b6396c)
+
+I then wanted to compare trip duration between members and casual riders across months and days. I created two separate horizontal bar graphs to do this.
+
+![Average Ride Length by Rider Type - Month](https://github.com/griffindeutsch/google_data_analytics_capstone/assets/63735165/a1953667-6ded-4d65-93bd-b38bad77b521)
+
+![Average Ride Length by Rider Type - Day](https://github.com/griffindeutsch/google_data_analytics_capstone/assets/63735165/c08bcd92-0242-49b9-ad2d-657292aa5760)
+
+
 
 
 
