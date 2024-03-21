@@ -169,6 +169,8 @@ We can see from this histogram that while both members and casual riders ride ar
 
 ![Ride Length by Rider Type Histogram](https://github.com/griffindeutsch/google_data_analytics_capstone/assets/63735165/a885bd2c-08ad-45fa-9a93-3b22f3b6396c)
 
+### Horizontal Bar Graphs of Average Ride Lengths by Rider Type
+
 I then wanted to compare trip duration between members and casual riders across months and days. I created two separate horizontal bar graphs to do this.
 
 ```
