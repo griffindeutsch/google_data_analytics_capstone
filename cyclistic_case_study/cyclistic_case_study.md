@@ -171,7 +171,11 @@ We can see from this histogram that while both members and casual riders ride ar
 
 I then wanted to compare trip duration between members and casual riders across months and days. I created two separate horizontal bar graphs to do this.
 
+Average ride length was 2.33 minutes longer on average per month for casual riders.
+
 ![Average Ride Length by Rider Type - Month](https://github.com/griffindeutsch/google_data_analytics_capstone/assets/63735165/a1953667-6ded-4d65-93bd-b38bad77b521)
+
+Average ride length was 2.82 minutes longer on average per day for casual riders.
 
 ![Average Ride Length by Rider Type - Day](https://github.com/griffindeutsch/google_data_analytics_capstone/assets/63735165/c08bcd92-0242-49b9-ad2d-657292aa5760)
 
