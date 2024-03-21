@@ -171,6 +171,34 @@ We can see from this histogram that while both members and casual riders ride ar
 
 I then wanted to compare trip duration between members and casual riders across months and days. I created two separate horizontal bar graphs to do this.
 
+```
+#Create horizontal bar graph showing Average Ride Length by Rider Type by Month
+data_2023_filtered_sd |>
+  group_by(month, rider_type) |>
+  summarise(average_ride_length = mean(ride_length)) |>
+    ggplot(aes(x = month, y = average_ride_length, fill = rider_type, label = round(average_ride_length, 1))) +
+    geom_bar(stat = "identity", position = "dodge") +
+    geom_text(aes(y = round(average_ride_length, 1))) +
+    coord_flip() +
+      labs(title = "Average Ride Length by Rider Type (by Month)",
+          x = "Month",
+          y = "Average Ride Length (mins)") +
+    theme_minimal()
+
+#Create horizontal bar graph showing Average Ride Length by Rider Type by Day of Week
+data_2023_filtered_sd |>
+  group_by(day_of_week, rider_type) |>
+  summarise(average_ride_length = mean(ride_length)) |>
+    ggplot(aes(x = day_of_week, y = average_ride_length, fill = rider_type, label = round(average_ride_length, 1))) +
+    geom_bar(stat = "identity", position = "dodge") +
+    geom_text(aes(y = round(average_ride_length, 1))) +
+    coord_flip() +
+      labs(title = "Average Ride Length by Rider Type (by Day)",
+          x = "Day of Week",
+          y = "Average Ride Length (mins)") +
+    theme_minimal()
+```
+
 Average ride length was 2.33 minutes longer on average per month for casual riders.
 
 ![Average Ride Length by Rider Type - Month](https://github.com/griffindeutsch/google_data_analytics_capstone/assets/63735165/a1953667-6ded-4d65-93bd-b38bad77b521)
