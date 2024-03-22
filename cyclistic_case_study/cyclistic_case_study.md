@@ -156,13 +156,18 @@ ride_count_by_day <- data_2023_filtered |>
 
 I created the following visualizations to determine relationships between casual riders and members.
 
+### Bar Graph of Monthly Rides by Rider Type
+
+![Monthly Rides By Rider Type Bar Graph](https://github.com/griffindeutsch/google_data_analytics_capstone/assets/63735165/092a9ac2-adfc-471c-bbe8-5ddc17b07696)
+
+
 ### Histogram of Ride Length by Rider Type
 ```
 ggplot(data_2023_filtered_sd, aes(x = ride_length, fill = rider_type)) +
   geom_histogram(position = "dodge", binwidth = 1) +
     labs(title = "Ride Length by Rider Type",
     x = "Ride Length (minutes)",
-    y = "Count") +
+    y = "Number of Rides") +
   theme_minimal() +
   scale_y_continuous(labels = label_number())
 ```
