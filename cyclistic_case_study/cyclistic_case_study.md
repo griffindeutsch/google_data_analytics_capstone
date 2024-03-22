@@ -1,10 +1,11 @@
 # 🚴 Cyclistic Case Study 🚴
 
-## Ask - Identify research/buisness task
+## Table of Contents
+## [Ask](#ask)
 ## Prepare - Acquire data and identify any integrity issues
 ## Process - Clean data and prepare for analysis
 ## Analyze - Manipulate data and perform calculations to identify trends and relationships
-## Share -  Create data visualizations
+## Share - Create data visualizations
 ## Act - Share conclusions and offer data-driven insights
 
 ## Ask
@@ -151,7 +152,7 @@ ride_count_by_day <- data_2023_filtered |>
   summarise(ride_count = n())
 ```
 
-## [Share](#share----create-data-visualizations)
+## Share
 
 I created the following visualizations to determine relationships between casual riders and members.
 
