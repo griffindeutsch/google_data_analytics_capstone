@@ -158,8 +158,33 @@ I created the following visualizations to determine relationships between casual
 
 ### Bar Graph of Monthly Rides by Rider Type
 
+```
+ggplot(ride_count_by_month, aes(x = month, y = ride_count, group = rider_type, fill = rider_type)) +
+geom_bar(stat = "identity", position = "dodge") +
+facet_wrap(~ month, scales = 'free_x') +
+labs(x = "Month",
+y = "Number of Rides",
+title = "Monthly Rides by Rider Type") +
+theme_minimal() +
+scale_y_continuous(labels = label_number())
+```
+
 ![Monthly Rides By Rider Type Bar Graph](https://github.com/griffindeutsch/google_data_analytics_capstone/assets/63735165/092a9ac2-adfc-471c-bbe8-5ddc17b07696)
 
+## Bar Graph of Daily Rides by Rider Type
+
+```
+ggplot(ride_count_by_day, aes(x = day_of_week, y = ride_count, group = rider_type, fill = rider_type)) +
+geom_bar(stat = "identity", position = "dodge") +
+facet_wrap(~ day_of_week, scales = 'free_x') +
+labs(x = "Day",
+y = "Number of Rides",
+title = "Daily Rides by Rider Type") +
+theme_minimal() +
+scale_y_continuous(labels = label_number())
+```
+
+![Daily Rides by Rider Type Bar Graph](https://github.com/griffindeutsch/google_data_analytics_capstone/assets/63735165/7373b8ca-488f-4daf-93f2-6eae2b81895f)
 
 ### Histogram of Ride Length by Rider Type
 ```
@@ -216,14 +241,10 @@ Average ride length was 2.82 minutes longer on average per day for casual riders
 ![Average Ride Length by Rider Type - Day](https://github.com/griffindeutsch/google_data_analytics_capstone/assets/63735165/c08bcd92-0242-49b9-ad2d-657292aa5760)
 
 
-
-
-
-
-
 ## Act
 
-
+From the data, we can observe the following:/
+1. 
 
 
 
