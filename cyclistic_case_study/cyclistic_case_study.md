@@ -241,11 +241,50 @@ Average ride length was 2.82 minutes longer on average per day for casual riders
 ![Average Ride Length by Rider Type - Day](https://github.com/griffindeutsch/google_data_analytics_capstone/assets/63735165/c08bcd92-0242-49b9-ad2d-657292aa5760)
 
 
+## Bar Graph of Monthly Rides by Bike Type
+
+```
+ggplot(ride_count_by_bike_type, aes(x = month, y = ride_count, group = bike_type, fill = bike_type)) +
+geom_bar(stat = "identity", position = "dodge") +
+facet_wrap(~ month, scales = 'free_x') +
+labs(x = "Month",
+y = "Number of Rides",
+title = "Number of Monthly Rides by Bike Type") +
+theme_minimal() +
+scale_y_continuous(labels = label_number())
+```
+
+![Number of Monthly Rides by Bike Type Bar Graph](https://github.com/griffindeutsch/google_data_analytics_capstone/assets/63735165/f9abac48-f147-4472-86f5-3160687f1c12)
+
+
+## Bar Graph of Daily Rides by Bike Type
+
+```
+ggplot(ride_count_by_bike_type, aes(x = day_of_week, y = ride_count, group = bike_type, fill = bike_type)) +
+geom_bar(stat = "identity", position = "dodge") +
+facet_wrap(~ day_of_week, scales = 'free_x') +
+labs(x = "Day",
+y = "Number of Rides",
+title = "Number of Daily Rides by Bike Type") +
+theme_minimal() +
+scale_y_continuous(labels = label_number())
+```
+
+![Number of Daily Rides by Bike Type Bar Graph](https://github.com/griffindeutsch/google_data_analytics_capstone/assets/63735165/3d924154-1312-4bc8-80d0-236e7f932013)
+
+
 ## Act
 
-From the data, we can observe the following:/
-1. 
+From my analysis, we can observe the following:
 
+1. There are about 150,000 more rides by members than causal riders per month across each month, with ridership for both categories being highest in summer and lowest in winter.
+2. Differences in daily number of rides between the two categories of rider involves more variation across days of the week, with Wednesday showing the largest difference between members and casual riders (about 425,000 more member rides on Wednesdays than casual rides). Saturdays and Sundays showed the smallest difference in number of rides between rider types with approximately 100,000 more member rides than casual rides.
+3. Member and casual rides show a similar frequency distribution in ride length relative to their overall number of rides. Most rides of about 5 minutes are taken by members, while rides exceeding 40 minutes in length were more frequently taken by casual riders.
+4. Casual riders consistenly ride for longer than members. 
+
+From these observations, I drew the following conclusions as to how Cyclistic could convert more casual riders to annual members:
+
+1. Further incentivize electric bikes  
 
 
 
