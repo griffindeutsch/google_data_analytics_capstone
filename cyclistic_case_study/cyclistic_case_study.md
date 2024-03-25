@@ -272,6 +272,19 @@ scale_y_continuous(labels = label_number())
 
 ![Number of Daily Rides by Bike Type Bar Graph](https://github.com/griffindeutsch/google_data_analytics_capstone/assets/63735165/3d924154-1312-4bc8-80d0-236e7f932013)
 
+## Stacked Bar Graph of Bike Type by Rider Type
+
+```
+ggplot(bike_type_by_rider_type, aes(x = bike_type, y = ride_count, fill = rider_type)) +
+geom_bar(stat = "identity", position = "stack") +
+labs(x = "Bike Type",
+y = "Number of Rides",
+title = "Bike Type Usage by Rider Type") +
+theme_minimal() +
+scale_y_continuous(labels = label_number())
+```
+![Bike Type Usage by Rider Type](https://github.com/griffindeutsch/google_data_analytics_capstone/assets/63735165/61b83e4e-1383-4359-a611-c550c8b5f726)
+
 
 ## Act
 
@@ -280,16 +293,16 @@ From my analysis, we can observe the following:
 1. There are about 150,000 more rides by members than causal riders per month across each month, with ridership for both categories being highest in summer and lowest in winter.
 2. Differences in daily number of rides between the two categories of rider involves more variation across days of the week, with Wednesday showing the largest difference between members and casual riders (about 425,000 more member rides on Wednesdays than casual rides). Saturdays and Sundays showed the smallest difference in number of rides between rider types with approximately 100,000 more member rides than casual rides.
 3. Member and casual rides show a similar frequency distribution in ride length relative to their overall number of rides. Most rides of about 5 minutes are taken by members, while rides exceeding 40 minutes in length were more frequently taken by casual riders.
-4. Casual riders consistenly ride for longer than members. 
+4. Casual riders consistenly ride for longer than members.
+5. Electric bikes are rode more often than classic bikes in every month except August and September.
+6. Electric bikes are rode more often than classic bikes throughout each day of the week.
+7. Members ride classic bikes and electric bikes at essentially the same rate, while casual riders ride electric bikes more frequently than classic bikes.
 
 From these observations, I drew the following conclusions as to how Cyclistic could convert more casual riders to annual members:
 
-1. Further incentivize electric bikes  
-
-
-
-
-
-
+1. **Further incentivize electric bikes in the membership program** - electric bikes are ridden more frequently overall by casual riders, perhaps showing that shorter ride length is preferable to casual riders to keep the price of the trip low. Alternatively, the price difference between classic and electric bikes may not be large enough to justify not using the electric bike for one-off rides.
+2. **Further incentivize riding during weekdays** - members ride much more frequently than casual riders during weekdays, highlighting the use of bikes for commuting. If a commuter pass was introduced that was priced similar to passes for other forms of transportation, casual riders may be more likely to ride to work during the week.
+3. **Adjust pricing for membership program to account for longer trips** - although casual riders ride electric bikes more frequently than classic bikes, they have consistently longer trips than members. This potentially indicates the price point for the intital undocking for casual riders being too high to justify shorter rides. Casual riders may not be saving enough in undocking fees with the membership to account for the extra upfront cost of membership.
+4. **Offer additional membership benefits during winter months** - ridership across both rider types is significantly lower in winter months. If Cyclistic offered an additional benefit during these months, such as no undocking fee for either bike type (as bike type usage is roughly equivalent during these months), it may attract casual riders to consider an electric bike, for example, as a primary mode of transport.
 
 
